@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings - Leftover Recipe Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Immediate auth redirect check to avoid content flash -->
+    <script>
+        if (!localStorage.getItem('currentUser')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">🍳 <span>Leftover <strong>Recipe</strong></span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li id="nav-home"><a href="index.html">Home</a></li>
+                    <li id="nav-expiration"><a href="expiration.html">Expiration Tracker</a></li>
+                    <li id="nav-favorites"><a href="favorites.html">Favorites</a></li>
+                    <li id="nav-profile" class="active"><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="nav-controls">
+                <button id="notif-bell-btn" class="notif-btn" title="Notifications">
+                    🔔
+                    <span id="notif-count-badge" class="notif-badge">0</span>
+                </button>
+                
+                <div class="user-menu">
+                    <div id="user-badge-trigger" class="user-badge">
+                        <div id="nav-user-avatar" class="user-avatar">U</div>
+                        <span id="nav-user-name">User</span>
+                        ▼
+                    </div>
+                    <div id="nav-user-dropdown" class="user-dropdown">
+                        <a href="profile.html">Edit Profile</a>
+                        <button id="nav-logout-btn" class="btn-logout">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Drawer Component -->
+    <div id="notification-drawer" class="notification-drawer">
+        <div class="notif-header">
+            <h3>Notifications</h3>
+            <button id="notif-close-btn" class="notif-close">✕</button>
+        </div>
+        <div id="notif-list-container" class="notif-list">
+            <!-- Loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div style="max-width: 650px; margin: 0 auto;">
+            <div class="card-section">
+                <h2 class="section-title">Edit Profile Settings</h2>
+                <div id="profile-feedback" class="feedback-message"></div>
+
+                <form id="profile-form" novalidate>
+                    <div class="form-group">
+                        <label for="prof-name">Full Name</label>
+                        <input type="text" id="prof-name" placeholder="John Doe" required autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prof-email">Email Address</label>
+                        <input type="email" id="prof-email" placeholder="john@example.com" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label>Default Dietary Preferences</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="prof-pref-halal"> Halal
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="prof-pref-vegetarian"> Vegetarian
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="prof-pref-vegan"> Vegan
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="prof-pref-glutenfree"> Gluten-Free
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                        <label>Default Allergen Exclusions</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="prof-allergy" value="egg"> Egg
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="prof-allergy" value="dairy"> Dairy
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="prof-allergy" value="gluten"> Gluten
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="prof-allergy" value="soy"> Soy
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="prof-allergy" value="seafood"> Seafood
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="prof-allergy" value="nuts"> Nuts
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                    
+                    <h3 style="font-size: 1rem; margin-bottom: 1rem; font-family: inherit; font-weight: 600;">
+                        Security & Change Password
+                    </h3>
+
+                    <div class="form-group">
+                        <label for="prof-new-password">New Password (Leave blank to keep current)</label>
+                        <input type="password" id="prof-new-password" placeholder="New Password (Min. 6 chars)" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-confirm-password">Confirm New Password</label>
+                        <input type="password" id="prof-confirm-password" placeholder="Confirm Password" autocomplete="new-password">
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+
+                    <div class="form-group" style="background-color: var(--light-bg); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 1.5rem;">
+                        <label for="prof-curr-password" style="color: var(--primary); font-weight: 700;">
+                            Verify Current Password *
+                        </label>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem; display: block;">
+                            You must enter your current password to save any updates.
+                        </span>
+                        <input type="password" id="prof-curr-password" placeholder="Enter current password" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Save Profile Settings
+                    </button>
+                </form>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="card-section" style="border-color: rgba(217, 56, 56, 0.3); background-color: rgba(217, 56, 56, 0.01);">
+                <h3 style="color: var(--expired); font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700;">
+                    Danger Zone
+                </h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.2rem;">
+                    Once you delete your account, there is no going back. All of your saved recipes, notes, and pantry items will be removed permanently.
+                </p>
+                <button id="delete-account-btn" class="btn btn-danger btn-block">
+                    Permanently Delete My Account
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Leftover Recipe Generator. Crafted for visual excellence & food waste reduction.</p>
+    </footer>
+
+    <!-- Load the auth controller module -->
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

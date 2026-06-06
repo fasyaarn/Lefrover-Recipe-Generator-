@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Recipes - Leftover Recipe Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Immediate auth redirect check to avoid content flash -->
+    <script>
+        if (!localStorage.getItem('currentUser')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">🍳 <span>Leftover <strong>Recipe</strong></span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li id="nav-home"><a href="index.html">Home</a></li>
+                    <li id="nav-expiration"><a href="expiration.html">Expiration Tracker</a></li>
+                    <li id="nav-favorites" class="active"><a href="favorites.html">Favorites</a></li>
+                    <li id="nav-profile"><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="nav-controls">
+                <button id="notif-bell-btn" class="notif-btn" title="Notifications">
+                    🔔
+                    <span id="notif-count-badge" class="notif-badge">0</span>
+                </button>
+                
+                <div class="user-menu">
+                    <div id="user-badge-trigger" class="user-badge">
+                        <div id="nav-user-avatar" class="user-avatar">U</div>
+                        <span id="nav-user-name">User</span>
+                        ▼
+                    </div>
+                    <div id="nav-user-dropdown" class="user-dropdown">
+                        <a href="profile.html">Edit Profile</a>
+                        <button id="nav-logout-btn" class="btn-logout">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Drawer Component -->
+    <div id="notification-drawer" class="notification-drawer">
+        <div class="notif-header">
+            <h3>Notifications</h3>
+            <button id="notif-close-btn" class="notif-close">✕</button>
+        </div>
+        <div id="notif-list-container" class="notif-list">
+            <!-- Loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="recipe-panel-header">
+            <h2>My Favorite Recipes</h2>
+            
+            <div class="recipe-search-bar">
+                <input type="text" id="fav-search-input" class="recipe-search-input" placeholder="Search saved recipes by name or category...">
+            </div>
+        </div>
+
+        <!-- Favorites Grid -->
+        <div id="favorites-grid" class="recipe-grid">
+            <!-- Loaded dynamically -->
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="fav-empty-state" class="empty-state hidden">
+            <div class="empty-icon">❤️</div>
+            <h3 class="empty-title">No Favorites Yet</h3>
+            <p>You haven't bookmarked any recipes. Browse matching recipes on the Home dashboard and click the heart icon to save them here!</p>
+            <div style="margin-top: 1.5rem;">
+                <a href="index.html" class="btn btn-primary">Go to Home Dashboard</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal Overlay -->
+    <div id="recipe-modal" class="modal-overlay">
+        <div class="modal-container">
+            <button id="modal-close-btn" class="modal-close-btn">✕</button>
+            <div class="modal-hero">
+                <span id="modal-category" class="recipe-card-category" style="align-self: flex-start; margin-bottom: 0.5rem;">Category</span>
+                <h2 id="modal-title">Recipe Name</h2>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3 class="modal-section-title">🥗 Ingredients Needed</h3>
+                    <ul id="modal-ingredients" class="modal-ingredients-list">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3 class="modal-section-title">🍳 Cooking Instructions</h3>
+                    <div id="modal-instructions" class="modal-instructions">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Leftover Recipe Generator. Crafted for visual excellence & food waste reduction.</p>
+    </footer>
+
+    <!-- Load the favorites controller module -->
+    <script type="module" src="js/favorites.js"></script>
+    <!-- Load auth for session checks -->
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

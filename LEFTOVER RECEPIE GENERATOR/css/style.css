@@ -1,0 +1,1219 @@
+/* ==========================================================================
+   Leftover Recipe Generator - Global Styles and Layout Design
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+:root {
+    --primary: #E05A47;       /* Warm Terracotta / Tomato */
+    --primary-hover: #C54B3A;
+    --secondary: #F4A261;     /* Peach Orange */
+    --accent: #2A9D8F;        /* Sage Green */
+    --accent-hover: #207A6F;
+    --dark: #264653;          /* Dark Charcoal Blue */
+    --light-bg: #FAF9F6;      /* Gourmet Warm Cream */
+    --card-bg: #FFFFFF;       /* Pure White */
+    --text-main: #2D3142;     /* Off-black text */
+    --text-muted: #6C757D;    /* Gray text */
+    --border: #E5E9EC;        /* Light gray border */
+    
+    /* Statuses */
+    --fresh: #2A9D8F;
+    --expiring: #EAA800;
+    --expired: #D93838;
+    
+    /* Shadows and Borders */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 10px 30px rgba(38, 70, 83, 0.08);
+    --shadow-lg: 0 20px 40px rgba(38, 70, 83, 0.15);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   Navigation Bar (Glassmorphic)
+   ========================================================================== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 233, 236, 0.5);
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+}
+
+.logo span {
+    color: var(--dark);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links li.active a {
+    color: var(--primary);
+    background-color: rgba(224, 90, 71, 0.08);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+/* User Badge */
+.user-menu {
+    position: relative;
+}
+
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.user-badge:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-avatar {
+    width: 24px;
+    height: 24px;
+    background-color: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    width: 180px;
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInSlide 0.2s ease-out;
+}
+
+.user-dropdown.show {
+    display: flex;
+}
+
+.user-dropdown a,
+.user-dropdown button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+    text-align: left;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+    background-color: var(--light-bg);
+    color: var(--primary);
+}
+
+.user-dropdown button.btn-logout {
+    border-top: 1px solid var(--border);
+    color: var(--expired);
+}
+
+.user-dropdown button.btn-logout:hover {
+    background-color: rgba(217, 56, 56, 0.05);
+    color: var(--expired);
+}
+
+/* Notification Trigger Button */
+.notif-btn {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.35rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.notif-btn:hover {
+    background-color: rgba(38, 70, 83, 0.06);
+}
+
+.notif-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+.notif-badge.active {
+    display: flex;
+    animation: pulse 2s infinite;
+}
+
+/* ==========================================================================
+   Page Main Container and Grids
+   ========================================================================== */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 992px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cards & Content Sections */
+.card-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.card-section:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px dashed rgba(224, 90, 71, 0.15);
+    padding-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    background-color: #FCFDFD;
+    transition: var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(224, 90, 71, 0.12);
+    background-color: var(--card-bg);
+}
+
+/* Button UI */
+.btn {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(224, 90, 71, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--light-bg);
+    border: 1px solid var(--border);
+    color: var(--dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--border);
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-danger {
+    background-color: var(--expired);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #B52828;
+}
+
+.btn-sm {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Error/Success Feedbacks */
+.feedback-message {
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.feedback-message.error {
+    display: block;
+    background-color: rgba(217, 56, 56, 0.08);
+    color: var(--expired);
+    border: 1px solid rgba(217, 56, 56, 0.15);
+}
+
+.feedback-message.success {
+    display: block;
+    background-color: rgba(42, 157, 143, 0.08);
+    color: var(--accent-hover);
+    border: 1px solid rgba(42, 157, 143, 0.15);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Pantry Ingredient System UI
+   ========================================================================== */
+.pantry-add-box {
+    margin-bottom: 1.2rem;
+}
+
+.pantry-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    min-height: 40px;
+}
+
+.tag-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.tag-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Category coloring */
+.tag-vegetable { background-color: rgba(42, 157, 143, 0.12); color: var(--accent-hover); border-color: rgba(42, 157, 143, 0.25); }
+.tag-protein { background-color: rgba(224, 90, 71, 0.12); color: var(--primary-hover); border-color: rgba(224, 90, 71, 0.25); }
+.tag-spice { background-color: rgba(244, 162, 97, 0.15); color: #B26B1E; border-color: rgba(244, 162, 97, 0.3); }
+.tag-dairy { background-color: rgba(38, 70, 83, 0.08); color: var(--dark); border-color: rgba(38, 70, 83, 0.15); }
+.tag-carbohydrate { background-color: rgba(230, 200, 100, 0.18); color: #8F6D00; border-color: rgba(230, 200, 100, 0.3); }
+
+.tag-remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: inherit;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.tag-remove-btn:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.tag-expiry-badge {
+    font-size: 0.7rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+    margin-left: 0.3rem;
+}
+
+/* Quick Add Drawer / Grid */
+.quick-add-section {
+    margin-top: 1.5rem;
+}
+
+.quick-add-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+}
+
+.quick-add-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.quick-add-pill {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px dashed var(--border);
+    border-radius: 50px;
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.quick-add-pill:hover {
+    border-color: var(--primary);
+    background-color: rgba(224, 90, 71, 0.04);
+    color: var(--primary);
+}
+
+.quick-add-pill.selected {
+    background-color: var(--primary);
+    color: white;
+    border-style: solid;
+    border-color: var(--primary);
+}
+
+/* Excluded lists style */
+.exclusion-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+}
+
+.exclude-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    background-color: rgba(217, 56, 56, 0.08);
+    color: var(--expired);
+    border: 1px solid rgba(217, 56, 56, 0.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Recipe Match Dashboard Area
+   ========================================================================== */
+.recipe-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.recipe-search-bar {
+    display: flex;
+    flex: 1;
+    min-width: 260px;
+    gap: 0.5rem;
+}
+
+.recipe-search-input {
+    flex: 1;
+}
+
+.recipe-sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.expiring-highlight-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(234, 168, 0, 0.08) 0%, rgba(224, 90, 71, 0.08) 100%);
+    border: 1px solid rgba(234, 168, 0, 0.2);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+.expiring-highlight-banner .text {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.expiring-highlight-banner strong {
+    color: var(--primary-hover);
+}
+
+/* Recipe Grid and Cards */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.recipe-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    transition: var(--transition);
+}
+
+.recipe-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(224, 90, 71, 0.2);
+}
+
+/* Recipe image placeholder or aesthetic header */
+.recipe-card-header {
+    height: 120px;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    position: relative;
+}
+
+.recipe-card-header::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(38, 70, 83, 0.15);
+}
+
+.recipe-card-category {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+}
+
+.recipe-card-percentage {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--card-bg);
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.85rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--primary);
+}
+
+.recipe-card-percentage.high-match {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.recipe-card-favorite-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.recipe-card-favorite-btn:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.recipe-card-favorite-btn.favorited {
+    color: var(--primary);
+    background-color: white;
+}
+
+/* Recipe Content Body */
+.recipe-card-body {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-card-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+}
+
+.recipe-dietary-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.badge-diet {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background-color: var(--light-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+.badge-diet.halal { background-color: rgba(42, 157, 143, 0.08); color: var(--accent-hover); border-color: rgba(42, 157, 143, 0.15); }
+.badge-diet.vegetarian { background-color: rgba(230, 200, 100, 0.08); color: #8F6D00; border-color: rgba(230, 200, 100, 0.15); }
+.badge-diet.vegan { background-color: rgba(42, 157, 143, 0.12); color: var(--accent); border-color: rgba(42, 157, 143, 0.2); }
+.badge-diet.glutenfree { background-color: rgba(244, 162, 97, 0.1); color: #C0753E; border-color: rgba(244, 162, 97, 0.2); }
+
+/* Matches / Missing List display */
+.recipe-card-ing-status {
+    margin-top: auto;
+    font-size: 0.78rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.8rem;
+}
+
+.recipe-card-ing-status .label {
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+}
+
+.recipe-card-ing-list {
+    margin-left: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-card-ing-list .matched-item {
+    color: var(--accent-hover);
+    font-weight: 500;
+}
+
+.recipe-card-ing-list .missing-item {
+    color: var(--text-muted);
+}
+
+.substitution-suggestion {
+    font-style: italic;
+    color: var(--primary);
+    font-size: 0.72rem;
+    margin-top: 0.1rem;
+    display: block;
+}
+
+/* ==========================================================================
+   Recipe Detail Modal
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(38, 70, 83, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-overlay.show {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-container {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: var(--light-bg);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.modal-close-btn:hover {
+    background-color: var(--border);
+    transform: rotate(90deg);
+}
+
+.modal-hero {
+    height: 180px;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+}
+
+.modal-hero h2 {
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-section {
+    margin-bottom: 1.5rem;
+}
+
+.modal-section-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.modal-ingredients-list {
+    list-style-position: inside;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.modal-instructions {
+    font-size: 0.9rem;
+    white-space: pre-line;
+    line-height: 1.7;
+    background-color: var(--light-bg);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+/* Personal notes text box in modal/favorites page */
+.recipe-note-box {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+}
+
+.recipe-note-textarea {
+    width: 100%;
+    height: 80px;
+    resize: none;
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Side Notification drawer
+   ========================================================================== */
+.notification-drawer {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 360px;
+    height: 100vh;
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-lg);
+    z-index: 600;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+}
+
+.notification-drawer.show {
+    right: 0;
+}
+
+.notif-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.notif-list {
+    padding: 1rem;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.notif-card {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    position: relative;
+    font-size: 0.85rem;
+    animation: fadeIn 0.2s ease;
+}
+
+.notif-card.expired {
+    background-color: rgba(217, 56, 56, 0.04);
+    border-left: 4px solid var(--expired);
+}
+
+.notif-card.expiring {
+    background-color: rgba(234, 168, 0, 0.04);
+    border-left: 4px solid var(--expiring);
+}
+
+.notif-dismiss-btn {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.notif-dismiss-btn:hover {
+    color: var(--primary);
+}
+
+.notif-msg {
+    margin-right: 1.2rem;
+    font-weight: 500;
+}
+
+.notif-date {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   States: Loaders, Empties, Status grids
+   ========================================================================== */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--text-muted);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.empty-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--primary);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(224, 90, 71, 0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+/* Expiration Dashboard table and cards */
+.expiration-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.expiration-list-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.expiration-list-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.expiration-list-title .count-badge {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50px;
+    color: white;
+}
+
+.count-badge.expired { background-color: var(--expired); }
+.count-badge.expiring { background-color: var(--expiring); }
+.count-badge.fresh { background-color: var(--fresh); }
+
+.exp-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.exp-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--light-bg);
+    border: 1px solid var(--border);
+}
+
+.exp-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.exp-item-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+}
+
+.exp-item-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.exp-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 71, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(224, 90, 71, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 90, 71, 0); }
+}
+
+/* ==========================================================================
+   Authentication Page Forms Layout (Centered Card)
+   ========================================================================== */
+.auth-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+}
+
+.auth-card-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.auth-card-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-top: 1.2rem;
+}
+
+.auth-card-sub a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.auth-card-sub a:hover {
+    text-decoration: underline;
+}
+
+/* Default allergies checkbox list styling */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: normal !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+}

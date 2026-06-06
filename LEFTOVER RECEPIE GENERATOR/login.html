@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Leftover Recipe Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Immediate guest-only redirect check to avoid content flash -->
+    <script>
+        if (localStorage.getItem('currentUser')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="logo" style="justify-content: center; margin-bottom: 1.5rem;">
+                🍳 <span>Leftover <strong>Recipe</strong></span>
+            </div>
+            
+            <h2 class="auth-card-title">Welcome Back!</h2>
+            
+            <!-- Dynamic feedback message box -->
+            <div id="auth-feedback" class="feedback-message"></div>
+
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="you@example.com" required autocomplete="email">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    Log In
+                </button>
+            </form>
+            
+            <p class="auth-card-sub">
+                Don't have an account? <a href="register.html">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Load the auth controller module -->
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
