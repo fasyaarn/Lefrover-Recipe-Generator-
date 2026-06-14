@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "$2a$10$oXKVyY1bmSoApA/PGkXq5uqS29riSi923Vmpq.cMSa86Aa.6CGJpC",
+      "preferences": {
+        "halal": false,
+        "vegetarian": false,
+        "vegan": false,
+        "glutenFree": false
+      },
+      "allergens": []
+    },
+    {
+      "id": 2,
+      "name": "Fasya Arinal Hudha",
+      "email": "fasfasyaa@gmail.com",
+      "password": "$2a$10$ZLQZyoH9kZI01Bmcc4cCbOpbIGISOS8NY3W/8qx5KmTvtcRPHxaBW",
+      "preferences": {
+        "halal": false,
+        "vegetarian": false,
+        "vegan": false,
+        "glutenFree": false
+      },
+      "allergens": []
+    }
+  ],
+  "pantry": [
+    {
+      "id": "ing_1781454335403_gj8ra4nqx",
+      "userId": 1,
+      "name": "chicken",
+      "category": "Protein",
+      "expiryDate": "2026-06-20",
+      "addedDate": "2026-06-14"
+    },
+    {
+      "id": "ing_1781454803984_25qissbvm",
+      "userId": 2,
+      "name": "chicken",
+      "category": "Protein",
+      "expiryDate": "",
+      "addedDate": "2026-06-14"
+    }
+  ],
+  "favorites": [],
+  "exclusions": []
+}
