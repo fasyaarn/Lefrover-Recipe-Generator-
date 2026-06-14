@@ -56,8 +56,8 @@ const authenticateToken = async (req, res, next) => {
 };
 
 // Health Check Route untuk Railway
-app.get('/', (req, res) => {
-    res.send('Server is up and running perfectly!');
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'OK', message: 'Server is up and running perfectly!' });
 });
 
 // --- AUTHENTICATION ENDPOINTS ---
