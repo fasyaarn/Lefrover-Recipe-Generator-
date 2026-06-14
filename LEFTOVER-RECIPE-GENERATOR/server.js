@@ -41,7 +41,7 @@ app.use(express.static(__dirname));
 const authenticateToken = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && (authHeader.startsWith('Bearer ') ? authHeader.substring(7) : authHeader);
-    
+
     if (!token) {
         return res.status(401).json({ message: 'Access token required.' });
     }
@@ -54,6 +54,11 @@ const authenticateToken = async (req, res, next) => {
         return res.status(403).json({ message: 'Invalid or expired session token.' });
     }
 };
+
+// Health Check Route untuk Railway
+app.get('/', (req, res) => {
+    res.send('Server is up and running perfectly!');
+});
 
 // --- AUTHENTICATION ENDPOINTS ---
 
@@ -99,9 +104,9 @@ app.post('/api/auth/register', async (req, res) => {
             vegan: !!(preferences && preferences.vegan),
             glutenFree: !!(preferences && preferences.glutenFree)
         };
-        
-        const allergensList = Array.isArray(allergens) 
-            ? allergens.map(a => a.toLowerCase().trim()) 
+
+        const allergensList = Array.isArray(allergens)
+            ? allergens.map(a => a.toLowerCase().trim())
             : [];
 
         // Insert new user record
